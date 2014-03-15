@@ -34,27 +34,7 @@ public class PIRPlugin extends CordovaPlugin{
         return false;
 	}
 	
-	public String showStatus() {
-		      // Show all the birthdays sorted by friend's name
-		      String result ="";
-		      try{
-		      String URL = "content://com.example.pircontentprovider.PIRProvider/Motion";
-		      Uri motion = Uri.parse(URL);
-		      Cursor c = getContentResolver().query(motion, null, null, null, "");
-		      result = "Status :";
-		      if (!c.moveToFirst()) {
-		      }else{
-		    	  do{
-		            result = result + "\n" + c.getString(c.getColumnIndex("id")) + 
-		    	            " with id " +  c.getString(c.getColumnIndex("status"));
-		          } while (c.moveToNext());
-		      }
-		      }catch(Exception ex){
-		      	result = ex.toString();
-		      }
-		      return result;
-	 
-	}
+
 	
 
 
