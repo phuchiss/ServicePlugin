@@ -29,7 +29,7 @@ public class MyService extends Service {
 	@Override
 	  public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
-		ReadContentProvider readContent = new ReadContentProvider(getBaseContext());
+		ReadContentProvider readContent = new ReadContentProvider(this);
 		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 		NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		if (intent != null && intent.getAction() != null
@@ -61,6 +61,7 @@ public class MyService extends Service {
 	// Broadcast a message to the IOIO plugin
 	private void broadcastVars(String status) {
 		// write var to send
+		System.out.println("broadcastVars : "+status);
 		broadcastIntent.putExtra("MotionStatus", status);
 		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 
@@ -88,7 +89,7 @@ public class MyService extends Service {
 				}
 				String status = showStatus();
 				System.out.println(status);
-			//	broadcastVars(status);
+				broadcastVars(status);
 			}
 			return null;
 		}
@@ -114,6 +115,7 @@ public class MyService extends Service {
 		// Broadcast a message to the IOIO plugin
 		private void broadcastVars(String status) {
 			// write var to send
+			System.out.println("broadcastVars : "+status);
 			broadcastIntent.putExtra("MotionStatus", status);
 			LocalBroadcastManager.getInstance(context).sendBroadcast(broadcastIntent);
 
