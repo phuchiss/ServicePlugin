@@ -19,16 +19,14 @@ public class PIRPlugin extends CordovaPlugin{
 	private Context thisContext;
 	private Intent ioioService;
 	private Intent broadcastIntent = new Intent("msgIOIO");
-	private String interval="";
-	private String dulation="";
-	public int PIRDetect =2;
+
+	private String MotionStatus ="";
 	private CallbackContext connectionCallbackContext; // for callback startup IOIO
 	private CallbackContext connectionCallbackMotion; // for callback Detect Motion sensor
 	
 	@Override
 	public boolean execute(String action, JSONArray args,
 			final CallbackContext callbackContext) throws JSONException {
-	
 		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
 			// Setup a method to receive messages broadcast from the IOIO
@@ -36,11 +34,12 @@ public class PIRPlugin extends CordovaPlugin{
                 		mMessageReceiver, 
                 		new IntentFilter("returnIOIOdata")
         		); 
-		//	runservice();
 			callbackContext.success("showStatu");
             		return true;
         	}
-	
+        	else if (action.equals("readStatus")) {
+        		callbackContext.success("MotionStatus : "+MotionStatus);
+        	}
         return false;
 	}
 	
@@ -48,17 +47,9 @@ public class PIRPlugin extends CordovaPlugin{
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
     	@Override
     	public void onReceive(Context context, Intent intent) {
-    		PIRDetect = intent.getIntExtra("PIRDetect", -1);
-    	//	System.out.println("mMessageReceiver : "+intent.getStringExtra("setinterval"));
-    	//	System.out.println("mMessageReceiver : "+intent.getStringExtra("setdulation"));
-    		if(intent.getStringExtra("setinterval")!= null){
-    			interval = intent.getStringExtra("setinterval");
+    		if(intent.getStringExtra("MotionStatus")!= null){
+    			MotionStatus = intent.getStringExtra("MotionStatus");
     		}
-    		if(intent.getStringExtra("setdulation")!= null){
-    			dulation =  intent.getStringExtra("setdulation");
-    		}
-    		
-    		
     	}
     };
     
