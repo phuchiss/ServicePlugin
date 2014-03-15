@@ -47,6 +47,7 @@ public class PIRPlugin extends CordovaPlugin{
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
     	@Override
     	public void onReceive(Context context, Intent intent) {
+    		System.out.println("receiver message :"+intent.getStringExtra("MotionStatus"));
     		if(intent.getStringExtra("MotionStatus")!= null){
     			MotionStatus = intent.getStringExtra("MotionStatus");
     		}
