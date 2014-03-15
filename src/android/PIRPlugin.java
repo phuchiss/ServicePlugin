@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 public class PIRPlugin extends CordovaPlugin{
@@ -23,15 +21,20 @@ public class PIRPlugin extends CordovaPlugin{
 	@Override
 	public boolean execute(String action, JSONArray args,
 			final CallbackContext callbackContext) throws JSONException {
-		final Intent service = new Intent(this,MyService.class);
+	
 		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
-			startService(service);
+			runservice();
 			callbackContext.success("data");
             		return true;
         	}
 	
         return false;
+	}
+	
+	public void runservice(){
+		Intent service = new Intent(this,MyService.class);
+		startService(service);
 	}
 
 }
