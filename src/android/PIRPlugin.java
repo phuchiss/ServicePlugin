@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.app.Service;
 import android.support.v4.content.LocalBroadcastManager;
 import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 
 public class PIRPlugin extends CordovaPlugin{
 
