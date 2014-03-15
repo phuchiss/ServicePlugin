@@ -24,7 +24,7 @@ public class PIRPlugin extends CordovaPlugin{
 	
 		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
-			runservice();
+		//	runservice();
 			callbackContext.success("data");
             		return true;
         	}
@@ -32,9 +32,6 @@ public class PIRPlugin extends CordovaPlugin{
         return false;
 	}
 	
-	public void runservice(){
-		Intent service = new Intent(this,MyService.class);
-		startService(service);
-	}
+
 
 }
