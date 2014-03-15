@@ -31,7 +31,6 @@ public class PIRPlugin extends CordovaPlugin{
 		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
 			startService(new Intent(this,MyService.class));
-			finish();
 			callbackContext.success("data");
             return true;
         }
