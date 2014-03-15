@@ -28,8 +28,8 @@ public class PIRPlugin extends CordovaPlugin{
 			System.out.println("startup IOIO service");
 			startService(service);
 			callbackContext.success("data");
-            return true;
-        }
+            		return true;
+        	}
 	
         return false;
 	}
