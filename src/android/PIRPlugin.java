@@ -27,29 +27,14 @@ public class PIRPlugin extends CordovaPlugin{
 		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
 		//	runservice();
-			callbackContext.success(showStatus());
+			callbackContext.success("showStatu");
             		return true;
         	}
 	
         return false;
 	}
 	
-	public String showStatus() {
-		      // Show all the birthdays sorted by friend's name
-		      String URL = "content://com.example.pircontentprovider.PIRProvider/Motion";
-		      Uri motion = Uri.parse(URL);
-		      Cursor c = getContentResolver().query(motion, null, null, null, "");
-		      String result = "Status :";
-		      if (!c.moveToFirst()) {
-		      }else{
-		    	  do{
-		            result = result + "\n" + c.getString(c.getColumnIndex("id")) + 
-		    	            " with id " +  c.getString(c.getColumnIndex("status"));
-		          } while (c.moveToNext());
-		      }
-		      return result;
-	 
-	}
+	
 
 	
 
