@@ -24,6 +24,8 @@ public class MyService extends Service {
 		return null;
 	}
 	
+	
+	
 	@Override
 	  public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
@@ -51,12 +53,18 @@ public class MyService extends Service {
 		}
 		
 		readContent.execute();
-		
+		broadcastVars("test");
 		
 	    return Service.START_NOT_STICKY;
 	  }
 
-	
+	// Broadcast a message to the IOIO plugin
+	private void broadcastVars(String status) {
+		// write var to send
+		broadcastIntent.putExtra("MotionStatus", status);
+		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
+
+	}
 	 
 	
 	private class ReadContentProvider extends AsyncTask<Void, Void, Void> {
@@ -80,7 +88,7 @@ public class MyService extends Service {
 				}
 				String status = showStatus();
 				System.out.println(status);
-				broadcastVars(status);
+			//	broadcastVars(status);
 			}
 			return null;
 		}
