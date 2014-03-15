@@ -4,10 +4,6 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
-
-
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
