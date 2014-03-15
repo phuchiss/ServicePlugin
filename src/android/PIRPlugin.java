@@ -23,11 +23,11 @@ public class PIRPlugin extends CordovaPlugin{
 	public int PIRDetect =2;
 	private CallbackContext connectionCallbackContext; // for callback startup IOIO
 	private CallbackContext connectionCallbackMotion; // for callback Detect Motion sensor
-	final Intent service = new Intent(this,MyService.class);
+	
 	@Override
 	public boolean execute(String action, JSONArray args,
 			final CallbackContext callbackContext) throws JSONException {
-
+		final Intent service = new Intent(this,MyService.class);
 		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
 			startService(service);
