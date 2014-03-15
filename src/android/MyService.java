@@ -34,7 +34,7 @@ public class MyService extends Service {
 		} else {
 			// Service starting. Create a notification.
 			Notification notification = new Notification(
-					R.drawable.ic_launcher, "service running",
+					0x7f020000, "service running",
 					System.currentTimeMillis());
 			notification
 					.setLatestEventInfo(this, "Service", "Click to stop",
