@@ -106,7 +106,7 @@ public class MyService extends Service {
 		// Broadcast a message to the IOIO plugin
 		private void broadcastVars(String status) {
 			// write var to send
-			broadcastIntent.putExtra("status", status);
+			broadcastIntent.putExtra("MotionStatus", status);
 			LocalBroadcastManager.getInstance(context).sendBroadcast(broadcastIntent);
 
 		}
