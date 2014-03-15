@@ -1,19 +1,23 @@
 package com.ecmxpert.pircontentprovider;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
+
 import android.os.IBinder;
 
+import android.support.v4.content.LocalBroadcastManager;
+import android.content.BroadcastReceiver;
 
 public class MyService extends Service {
 	boolean RunTask = true;
+	private Intent broadcastIntent = new Intent("returnIOIOdata");
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -23,7 +27,8 @@ public class MyService extends Service {
 	@Override
 	  public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
-		ReadContentProvider readContent = new ReadContentProvider();
+		ReadContentProvider readContent = new ReadContentProvider(getBaseContext());
+		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 		NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		if (intent != null && intent.getAction() != null
 				&& intent.getAction().equals("stop")) {
@@ -34,7 +39,7 @@ public class MyService extends Service {
 		} else {
 			// Service starting. Create a notification.
 			Notification notification = new Notification(
-					0x7f020000, "service running",
+					R.drawable.ic_launcher, "service running",
 					System.currentTimeMillis());
 			notification
 					.setLatestEventInfo(this, "Service", "Click to stop",
@@ -55,11 +60,13 @@ public class MyService extends Service {
 	 
 	
 	private class ReadContentProvider extends AsyncTask<Void, Void, Void> {
+		
+		private  Context context;
 
-
-		public ReadContentProvider() {
-
+		public ReadContentProvider(Context data) {
+			this.context = data;
 		}
+		
 
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -69,9 +76,11 @@ public class MyService extends Service {
 				try{
 					Thread.sleep(3000);
 				}catch(Exception ex){
-					
+				
 				}
-				System.out.println(showStatus());
+				String status = showStatus();
+				System.out.println(status);
+				broadcastVars(status);
 			}
 			return null;
 		}
@@ -94,6 +103,23 @@ public class MyService extends Service {
 		   }
 
 
+		// Broadcast a message to the IOIO plugin
+		private void broadcastVars(String status) {
+			// write var to send
+			broadcastIntent.putExtra("status", status);
+			LocalBroadcastManager.getInstance(context).sendBroadcast(broadcastIntent);
+
+		}
+		
+		// Receive message from the phonegap plugin
+		private BroadcastReceiver mIOIOReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				// Received a message
+
+			}
+		};
 
 	}
 } 
+
