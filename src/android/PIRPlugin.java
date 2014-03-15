@@ -7,6 +7,8 @@ import org.json.JSONException;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.database.Cursor;
+import android.net.Uri;
 
 public class PIRPlugin extends CordovaPlugin{
 
@@ -25,11 +27,33 @@ public class PIRPlugin extends CordovaPlugin{
 		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
 		//	runservice();
-			callbackContext.success("data");
+			callbackContext.success(showStatus());
             		return true;
         	}
 	
         return false;
+	}
+	
+	public String showStatus() {
+		      // Show all the birthdays sorted by friend's name
+		      String result ="";
+		      try{
+		      String URL = "content://com.example.pircontentprovider.PIRProvider/Motion";
+		      Uri motion = Uri.parse(URL);
+		      Cursor c = getContentResolver().query(motion, null, null, null, "");
+		      result = "Status :";
+		      if (!c.moveToFirst()) {
+		      }else{
+		    	  do{
+		            result = result + "\n" + c.getString(c.getColumnIndex("id")) + 
+		    	            " with id " +  c.getString(c.getColumnIndex("status"));
+		          } while (c.moveToNext());
+		      }
+		      }catch(Exception ex){
+		      	result = ex.toString();
+		      }
+		      return result;
+	 
 	}
 	
 
