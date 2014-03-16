@@ -39,25 +39,31 @@ public class PIRPlugin extends CordovaPlugin{
         	}
         	else if (action.equals("readStatus")) {
         		//callbackContext.success("MotionStatus : "+MotionStatus);
-        		ioioGetdata(callbackContext);
+        		
+        		if (this.connectionCallbackMotion != null) {
+                		callbackContext.error( "motion service already running.");
+                		return true;
+            		}
+            		this.connectionCallbackMotion = callbackContext;
+        		
+        		PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
+            		pluginResult.setKeepCallback(true);
+            		callbackContext.sendPluginResult(pluginResult);
+            		ioioGetdata();
+            		return true;
+        		
         	}
         return false;
 	}
 	
-	private void ioioGetdata(CallbackContext callbackContext) {
+	private void ioioGetdata() {
     	final String message = String.valueOf(MotionStatus);
     //	System.out.println("PIR Detect :"+message);
     	
 
     	if (message != null && message.length() > 0) { 
             //callbackContext.success(message);
-            
-            this.connectionCallbackMotion = callbackContext;
-            
-            	PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
-    		pluginResult.setKeepCallback(true); 
-    		
-    
+
     	//	PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
         //	pluginResult.setKeepCallback(true);
         //	callbackContext.sendPluginResult(pluginResult);
@@ -67,21 +73,23 @@ public class PIRPlugin extends CordovaPlugin{
                 		//PluginResult result = new PluginResult(PluginResult.Status.OK, String.valueOf(message));
                     	//result.setKeepCallback(true);
                     //	connectionCallbackMotion.sendPluginResult(result);
-                    		PluginResult result = new PluginResult(PluginResult.Status.OK, data); 
-    				result.setKeepCallback(false); 
-    				this.success(result, this.callbackContext); 
+                    		if (this.connectionCallbackMotion != null) {
+            				PluginResult result = new PluginResult(PluginResult.Status.OK, info);
+            				result.setKeepCallback(true);
+            				this.connectionCallbackMotion.sendPluginResult(result);
+        			}
                 		try{
-                			Thread.sleep(300);
+                			Thread.sleep(1000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
                 	}
                 }
             });
-            	return pluginResult; 
+            
         	//return true;
         } else {
-            callbackContext.error("IOIO.java Expected one non-empty string argument.");
+            
         }
     }
 	
