@@ -22,7 +22,7 @@ public class PIRPlugin extends CordovaPlugin{
 
 	private String MotionStatus ="";
 	private CallbackContext connectionCallbackContext; // for callback startup IOIO
-	private CallbackContext connectionCallbackMotion; // for callback Detect Motion sensor
+	private CallbackContext connectionCallbackMotion = null; // for callback Detect Motion sensor
 	
 	@Override
 	public boolean execute(String action, JSONArray args,
@@ -74,7 +74,7 @@ public class PIRPlugin extends CordovaPlugin{
                     	//result.setKeepCallback(true);
                     //	connectionCallbackMotion.sendPluginResult(result);
                     		if (this.connectionCallbackMotion != null) {
-            				PluginResult result = new PluginResult(PluginResult.Status.OK, info);
+            				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
             				result.setKeepCallback(true);
             				this.connectionCallbackMotion.sendPluginResult(result);
         			}
