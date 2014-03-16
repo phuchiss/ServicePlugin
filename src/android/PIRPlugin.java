@@ -22,7 +22,7 @@ public class PIRPlugin extends CordovaPlugin{
 
 	private String MotionStatus ="";
 	private CallbackContext connectionCallbackContext; // for callback startup IOIO
-	private CallbackContext connectionCallbackMotion = null; // for callback Detect Motion sensor
+	public CallbackContext connectionCallbackMotion = null; // for callback Detect Motion sensor
 	
 	@Override
 	public boolean execute(String action, JSONArray args,
@@ -40,11 +40,11 @@ public class PIRPlugin extends CordovaPlugin{
         	else if (action.equals("readStatus")) {
         		//callbackContext.success("MotionStatus : "+MotionStatus);
         		
-        		if (connectionCallbackMotion != null) {
+        		if (this.connectionCallbackMotion != null) {
                 		callbackContext.error( "motion service already running.");
                 		return true;
             		}
-            		connectionCallbackMotion = callbackContext;
+            		this.connectionCallbackMotion = callbackContext;
         		
         		PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             		pluginResult.setKeepCallback(false);
@@ -79,7 +79,7 @@ public class PIRPlugin extends CordovaPlugin{
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		if (connectionCallbackMotion != null) {
+                		if (this.connectionCallbackMotion != null) {
             				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
             				result.setKeepCallback(true);
             				connectionCallbackMotion.sendPluginResult(result);
