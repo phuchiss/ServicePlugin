@@ -58,7 +58,7 @@ public class PIRPlugin extends CordovaPlugin{
 	
 	private void ioioGetdata(CallbackContext callback) {
     	final String message = String.valueOf(MotionStatus);
-    	finL CallbackContext motion = callback;
+    	final CallbackContext motion = callback;
     	if (message != null && message.length() > 0) { 
   
         	cordova.getThreadPool().execute(new Runnable() {
