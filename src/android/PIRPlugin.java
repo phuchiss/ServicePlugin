@@ -59,7 +59,7 @@ public class PIRPlugin extends CordovaPlugin{
         	cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	while(true){
-                		PluginResult result = new PluginResult(PluginResult.Status.OK, String.valueOf(PIRDetect));
+                		PluginResult result = new PluginResult(PluginResult.Status.OK, String.valueOf(message));
                     	result.setKeepCallback(true);
                     	connectionCallbackMotion.sendPluginResult(result);
                 		try{
