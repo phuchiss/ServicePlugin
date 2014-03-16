@@ -46,11 +46,10 @@ public class PIRPlugin extends CordovaPlugin{
             		}
             		this.connectionCallbackMotion = callbackContext;
         		
-        		PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
-            		pluginResult.setKeepCallback(false);
-            		callbackContext.sendPluginResult(pluginResult);
+        		PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
+    			pluginResult.setKeepCallback(true); 
             		ioioGetdata(connectionCallbackMotion);
-            		return true;
+            		return pluginResult; 
         		
         	}
         return false;
@@ -70,9 +69,9 @@ public class PIRPlugin extends CordovaPlugin{
                 			ex.printStackTrace();
                 		}
                 		if (motion != null) {
-            				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
-            				result.setKeepCallback(true);
-            				motion.sendPluginResult(result);
+            				PluginResult result = new PluginResult(PluginResult.Status.OK, message); 
+    					result.setKeepCallback(false); 
+    					this.success(result, this.motion); 
         			}
                 	}
                 }
