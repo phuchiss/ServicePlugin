@@ -49,40 +49,29 @@ public class PIRPlugin extends CordovaPlugin{
         		PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             		pluginResult.setKeepCallback(false);
             		callbackContext.sendPluginResult(pluginResult);
-            		ioioGetdata();
+            		ioioGetdata(connectionCallbackMotion);
             		return true;
         		
         	}
         return false;
 	}
 	
-	private void ioioGetdata() {
+	private void ioioGetdata(CallbackContext callback) {
     	final String message = String.valueOf(MotionStatus);
-    //	System.out.println("PIR Detect :"+message);
-    	
-
     	if (message != null && message.length() > 0) { 
-            //callbackContext.success(message);
-
-    	//	PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-        //	pluginResult.setKeepCallback(true);
-        //	callbackContext.sendPluginResult(pluginResult);
+  
         	cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	while(true){
-                		//PluginResult result = new PluginResult(PluginResult.Status.OK, String.valueOf(message));
-                    	//result.setKeepCallback(true);
-                    //	connectionCallbackMotion.sendPluginResult(result);
-                    		
                 		try{
                 			Thread.sleep(1000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		if (this.connectionCallbackMotion != null) {
+                		if (this.callback != null) {
             				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
             				result.setKeepCallback(true);
-            				connectionCallbackMotion.sendPluginResult(result);
+            				this.callback.sendPluginResult(result);
         			}
                 	}
                 }
