@@ -38,10 +38,43 @@ public class PIRPlugin extends CordovaPlugin{
             		return true;
         	}
         	else if (action.equals("readStatus")) {
-        		callbackContext.success("MotionStatus : "+MotionStatus);
+        		//callbackContext.success("MotionStatus : "+MotionStatus);
+        		ioioGetdata(callbackContext);
         	}
         return false;
 	}
+	
+	private void ioioGetdata(CallbackContext callbackContext) {
+    	String message = String.valueOf(MotionStatus);
+    //	System.out.println("PIR Detect :"+message);
+    	
+
+    	if (message != null && message.length() > 0) { 
+            //callbackContext.success(message);
+            
+            this.connectionCallbackMotion = callbackContext;
+    		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
+        	pluginResult.setKeepCallback(true);
+        	callbackContext.sendPluginResult(pluginResult);
+        	cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                	while(true){
+                		PluginResult result = new PluginResult(PluginResult.Status.OK, String.valueOf(PIRDetect));
+                    	result.setKeepCallback(true);
+                    	connectionCallbackMotion.sendPluginResult(result);
+                		try{
+                			Thread.sleep(300);
+                		}catch(Exception ex){
+                			ex.printStackTrace();
+                		}
+                	}
+                }
+            });
+        	//return true;
+        } else {
+            callbackContext.error("IOIO.java Expected one non-empty string argument.");
+        }
+    }
 	
 	// Receive message from the IOIO device
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
