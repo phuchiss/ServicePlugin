@@ -73,7 +73,7 @@ public class PIRPlugin extends CordovaPlugin{
                 		//PluginResult result = new PluginResult(PluginResult.Status.OK, String.valueOf(message));
                     	//result.setKeepCallback(true);
                     //	connectionCallbackMotion.sendPluginResult(result);
-                    		if (this.connectionCallbackMotion != null) {
+                    		if (connectionCallbackMotion != null) {
             				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
             				result.setKeepCallback(true);
             				connectionCallbackMotion.sendPluginResult(result);
