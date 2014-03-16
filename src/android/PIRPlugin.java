@@ -45,7 +45,7 @@ public class PIRPlugin extends CordovaPlugin{
 	}
 	
 	private void ioioGetdata(CallbackContext callbackContext) {
-    	String message = String.valueOf(MotionStatus);
+    	final String message = String.valueOf(MotionStatus);
     //	System.out.println("PIR Detect :"+message);
     	
 
