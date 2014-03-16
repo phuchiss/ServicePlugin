@@ -68,10 +68,10 @@ public class PIRPlugin extends CordovaPlugin{
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		if (this.callback != null) {
+                		if (callback != null) {
             				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
             				result.setKeepCallback(true);
-            				this.callback.sendPluginResult(result);
+            				callback.sendPluginResult(result);
         			}
                 	}
                 }
