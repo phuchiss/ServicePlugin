@@ -48,8 +48,9 @@ public class PIRPlugin extends CordovaPlugin{
         		
         		PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
     			pluginResult.setKeepCallback(true); 
+    			callbackContext.sendPluginResult(pluginResult);
             		ioioGetdata(connectionCallbackMotion);
-            		return pluginResult; 
+            		return true; 
         		
         	}
         return false;
@@ -71,7 +72,7 @@ public class PIRPlugin extends CordovaPlugin{
                 		if (motion != null) {
             				PluginResult result = new PluginResult(PluginResult.Status.OK, message); 
     					result.setKeepCallback(false); 
-    					this.success(result, this.motion); 
+    					this.success(result, motion); 
         			}
                 	}
                 }
