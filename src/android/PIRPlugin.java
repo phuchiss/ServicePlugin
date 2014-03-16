@@ -40,11 +40,11 @@ public class PIRPlugin extends CordovaPlugin{
         	else if (action.equals("readStatus")) {
         		//callbackContext.success("MotionStatus : "+MotionStatus);
         		
-        		if (this.connectionCallbackMotion != null) {
+        		if (connectionCallbackMotion != null) {
                 		callbackContext.error( "motion service already running.");
                 		return true;
             		}
-            		this.connectionCallbackMotion = callbackContext;
+            		connectionCallbackMotion = callbackContext;
         		
         		PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             		pluginResult.setKeepCallback(true);
@@ -76,7 +76,7 @@ public class PIRPlugin extends CordovaPlugin{
                     		if (this.connectionCallbackMotion != null) {
             				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
             				result.setKeepCallback(true);
-            				this.connectionCallbackMotion.sendPluginResult(result);
+            				connectionCallbackMotion.sendPluginResult(result);
         			}
                 		try{
                 			Thread.sleep(1000);
