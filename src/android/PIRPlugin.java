@@ -73,16 +73,17 @@ public class PIRPlugin extends CordovaPlugin{
                 		//PluginResult result = new PluginResult(PluginResult.Status.OK, String.valueOf(message));
                     	//result.setKeepCallback(true);
                     //	connectionCallbackMotion.sendPluginResult(result);
-                    		if (connectionCallbackMotion != null) {
-            				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
-            				result.setKeepCallback(true);
-            				connectionCallbackMotion.sendPluginResult(result);
-        			}
+                    		
                 		try{
                 			Thread.sleep(1000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
+                		if (connectionCallbackMotion != null) {
+            				PluginResult result = new PluginResult(PluginResult.Status.OK, message);
+            				result.setKeepCallback(true);
+            				connectionCallbackMotion.sendPluginResult(result);
+        			}
                 	}
                 }
             });
