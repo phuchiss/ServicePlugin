@@ -45,10 +45,10 @@ private static final String LOG_TAG = "BatteryManager";
 			callbackContext.success("showStatu");
             		return true;
         }else if (action.equals("readStatus")) {
-            if (this.batteryCallbackContext != null) {
-                callbackContext.error( "Battery listener already running.");
-                return true;
-            }
+        //    if (this.batteryCallbackContext != null) {
+        //        callbackContext.error( "Battery listener already running.");
+         //       return true;
+         //   }
             this.batteryCallbackContext = callbackContext;
 
             // Don't return any result now, since status results will be sent when events come in from broadcast receiver
