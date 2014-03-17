@@ -60,13 +60,13 @@ private static final String LOG_TAG = "BatteryManager";
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-            sendUpdate(data, false);
+            sendUpdate("data", false);
             try{
                 			Thread.sleep(5000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-            sendUpdate(data, false);
+            sendUpdate("test", false);
                    
             return true;
         }
