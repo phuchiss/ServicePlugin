@@ -25,10 +25,6 @@ private static final String LOG_TAG = "BatteryManager";
     /**
      * Constructor.
      */
-    public BatteryListener() {
-        this.receiver = null;
-    }
-
     /**
      * Executes the request.
      *
