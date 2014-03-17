@@ -16,78 +16,98 @@ import android.content.IntentFilter;
 
 public class PIRPlugin extends CordovaPlugin{
 
-private static final String LOG_TAG = "BatteryManager";
+	private Context thisContext;
+	private Intent ioioService;
+	private Intent broadcastIntent = new Intent("msgIOIO");
 
-    BroadcastReceiver receiver;
-
-    private CallbackContext batteryCallbackContext = null;
-    private Intent broadcastIntent = new Intent("msgIOIO");	
-    /**
-     * Constructor.
-     */
-    /**
-     * Executes the request.
-     *
-     * @param action        	The action to execute.
-     * @param args          	JSONArry of arguments for the plugin.
-     * @param callbackContext 	The callback context used when calling back into JavaScript.
-     * @return              	True if the action was valid, false if not.
-     */
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-        
-        if (action.equals("startservice")) {
+	private String MotionStatus ="";
+	private CallbackContext connectionCallbackContext; // for callback startup IOIO
+	public CallbackContext connectionCallbackMotion = null; // for callback Detect Motion sensor
+	
+	@Override
+	public boolean execute(String action, JSONArray args,
+			final CallbackContext callbackContext) throws JSONException {
+		if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
 			// Setup a method to receive messages broadcast from the IOIO
-        	//	LocalBroadcastManager.getInstance(thisContext).registerReceiver(
-                //		mMessageReceiver, 
-                //		new IntentFilter("returnIOIOdata")
-        	//	); 
+        		LocalBroadcastManager.getInstance(thisContext).registerReceiver(
+                		mMessageReceiver, 
+                		new IntentFilter("returnIOIOdata")
+        		); 
 			callbackContext.success("showStatu");
             		return true;
-        }else if (action.equals("readStatus")) {
-        //    if (this.batteryCallbackContext != null) {
-        //        callbackContext.error( "Battery listener already running.");
-         //       return true;
-         //   }
-            this.batteryCallbackContext = callbackContext;
-
-            // Don't return any result now, since status results will be sent when events come in from broadcast receiver
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-            pluginResult.setKeepCallback(true);
-            callbackContext.sendPluginResult(pluginResult);
-            
-            cordova.getThreadPool().execute(new Runnable() {
+        	}
+        	else if (action.equals("readStatus")) {
+        		//callbackContext.success("MotionStatus : "+MotionStatus);
+        		
+        		if (this.connectionCallbackMotion != null) {
+                		callbackContext.error( "motion service already running.");
+                		return true;
+            		}
+            		this.connectionCallbackMotion = callbackContext;
+        		
+        		PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
+    			pluginResult.setKeepCallback(true); 
+    			callbackContext.sendPluginResult(pluginResult);
+            		ioioGetdata(connectionCallbackMotion);
+            		return true; 
+        		
+        	}
+        return false;
+	}
+	
+	private void ioioGetdata(CallbackContext callback) {
+    	final String message = String.valueOf(MotionStatus);
+    	final CallbackContext motion = callback;
+    	if (message != null && message.length() > 0) { 
+  
+        	cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	while(true){
                 		try{
-                			Thread.sleep(3000);
+                			Thread.sleep(1000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		sendUpdate("test", true);
+                		if (motion != null) {
+            				PluginResult result = new PluginResult(PluginResult.Status.OK, message); 
+    					result.setKeepCallback(false); 
+    					this.success(result, motion); 
+        			}
                 	}
                 }
             });
-            return true;
-        }
-
-        return false;
-    }
-
-    
-    
-
-    /**
-     * Create a new plugin result and send it back to JavaScript
-     *
-     * @param connection the network info to set as navigator.connection
-     */
-    private void sendUpdate(String message, boolean keepCallback) {
-        if (this.batteryCallbackContext != null) {
-        	System.out.println("sendupdate");
-            PluginResult result = new PluginResult(PluginResult.Status.OK, message);
-            result.setKeepCallback(keepCallback);
-            this.batteryCallbackContext.sendPluginResult(result);
+            
+        	//return true;
+        } else {
+            
         }
     }
+	
+	// Receive message from the IOIO device
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    	@Override
+    	public void onReceive(Context context, Intent intent) {
+    		System.out.println("receiver message :"+intent.getStringExtra("MotionStatus"));
+    		if(intent.getStringExtra("MotionStatus")!= null){
+    			MotionStatus = intent.getStringExtra("MotionStatus");
+    		}
+    	}
+    };
+    
+    // Send a message to IOIO service
+    private void ioioSendMessage(String command,String dulation,String interval, CallbackContext callbackContext){
+    	// Which vars to send  
+    	broadcastIntent.putExtra("command", command);
+    	broadcastIntent.putExtra("dulation", dulation);
+    	broadcastIntent.putExtra("interval", interval);
+    	// Send the message to the IOIO
+        LocalBroadcastManager.getInstance(thisContext).sendBroadcast(broadcastIntent);
+    }
+	
+	
+
+	
+
+
 }
