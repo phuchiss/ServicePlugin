@@ -22,7 +22,12 @@ private static final String LOG_TAG = "BatteryManager";
 
     private CallbackContext batteryCallbackContext = null;
     private Intent broadcastIntent = new Intent("msgIOIO");	
-    
+    /**
+     * Constructor.
+     */
+    public BatteryListener() {
+        this.receiver = null;
+    }
 
     /**
      * Executes the request.
@@ -89,7 +94,7 @@ private static final String LOG_TAG = "BatteryManager";
      *
      * @param connection the network info to set as navigator.connection
      */
-    private void sendUpdate(String message info, boolean keepCallback) {
+    private void sendUpdate(String message, boolean keepCallback) {
         if (this.batteryCallbackContext != null) {
             PluginResult result = new PluginResult(PluginResult.Status.OK, message);
             result.setKeepCallback(keepCallback);
