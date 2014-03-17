@@ -63,7 +63,7 @@ private static final String LOG_TAG = "BatteryManager";
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		sendUpdate(data, false);
+                		sendUpdate("test", false);
                 //	}
                 }
             });
