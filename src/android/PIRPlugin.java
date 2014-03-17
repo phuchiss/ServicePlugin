@@ -78,30 +78,7 @@ private static final String LOG_TAG = "BatteryManager";
     }
 
     
-    /**
-     * Updates the JavaScript side whenever the battery changes
-     *
-     * @param batteryIntent the current battery information
-     * @return
-     */
-    private void updateBatteryInfo(String message) {
-        final String data = message;
-        cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                //	while(true){
-                		try{
-                			Thread.sleep(2000);
-                		}catch(Exception ex){
-                			ex.printStackTrace();
-                		}
-						PluginResult result = new PluginResult(PluginResult.Status.OK, "test");
-						result.setKeepCallback(false);
-					 	batteryCallbackContext.sendPluginResult(result);
-                		//sendUpdate(data, false);
-                //	}
-                }
-            });
-    }
+    
 
     /**
      * Create a new plugin result and send it back to JavaScript
