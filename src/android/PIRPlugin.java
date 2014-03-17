@@ -56,28 +56,25 @@ private static final String LOG_TAG = "BatteryManager";
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
             
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                	int count =0;
-                	while(true){
+            
+                
                 		try{
                 			Thread.sleep(5000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		if(count <= 5){
                 			sendUpdate("test", true);
-                			count++;
-                		}else{
-                			sendUpdate("test", false);
-                			count =0;
+         
+                		try{
+                			Thread.sleep(5000);
+                		}catch(Exception ex){
+                			ex.printStackTrace();
                 		}
-                		
-        			
-                	}
-                }
-            });
-            return true;
+                			sendUpdate("test", true);
+        		
+                	
+  
+           // return true;
         }
 
         return false;
