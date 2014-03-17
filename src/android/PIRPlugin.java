@@ -38,9 +38,9 @@ private static final String LOG_TAG = "BatteryManager";
         if (action.equals("startservice")) {
 			System.out.println("startup IOIO service");
 			// Setup a method to receive messages broadcast from the IOIO
-        		LocalBroadcastManager.getInstance(thisContext).registerReceiver(
-                		mMessageReceiver, 
-                		new IntentFilter("returnIOIOdata")
+        	//	LocalBroadcastManager.getInstance(thisContext).registerReceiver(
+                //		mMessageReceiver, 
+                //		new IntentFilter("returnIOIOdata")
         		); 
 			callbackContext.success("showStatu");
             		return true;
@@ -70,7 +70,7 @@ private static final String LOG_TAG = "BatteryManager";
      * @return
      */
     private void updateBatteryInfo(String message) {
-        
+        final String data = message;
         cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	while(true){
@@ -79,7 +79,7 @@ private static final String LOG_TAG = "BatteryManager";
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		sendUpdate(message, true);
+                		sendUpdate(data, true);
                 	}
                 }
             });
