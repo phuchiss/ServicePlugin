@@ -41,7 +41,7 @@ private static final String LOG_TAG = "BatteryManager";
         	//	LocalBroadcastManager.getInstance(thisContext).registerReceiver(
                 //		mMessageReceiver, 
                 //		new IntentFilter("returnIOIOdata")
-        		); 
+        	//	); 
 			callbackContext.success("showStatu");
             		return true;
         }else if (action.equals("readStatus")) {
