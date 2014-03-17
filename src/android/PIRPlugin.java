@@ -22,12 +22,7 @@ private static final String LOG_TAG = "BatteryManager";
 
     private CallbackContext batteryCallbackContext = null;
     private Intent broadcastIntent = new Intent("msgIOIO");	
-    /**
-     * Constructor.
-     */
-    public BatteryListener() {
-        this.receiver = null;
-    }
+    
 
     /**
      * Executes the request.
