@@ -68,7 +68,7 @@ private static final String LOG_TAG = "BatteryManager";
                 	}
                 }
             });
-           // return true;
+            return true;
         }
 
         return false;
