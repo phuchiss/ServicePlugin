@@ -56,10 +56,8 @@ private static final String LOG_TAG = "BatteryManager";
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
             
-            PluginResult result = new PluginResult(PluginResult.Status.OK, "test");
-            result.setKeepCallback(false);
-            this.batteryCallbackContext.sendPluginResult(result);
-          //  updateBatteryInfo("test");
+            
+            updateBatteryInfo("test");
             return true;
         }
 
@@ -83,7 +81,10 @@ private static final String LOG_TAG = "BatteryManager";
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		sendUpdate(data, false);
+						PluginResult result = new PluginResult(PluginResult.Status.OK, "test");
+						result.setKeepCallback(false);
+						this.batteryCallbackContext.sendPluginResult(result);
+                		//sendUpdate(data, false);
                 //	}
                 }
             });
