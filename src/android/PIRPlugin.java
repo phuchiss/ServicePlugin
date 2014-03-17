@@ -57,7 +57,7 @@ private static final String LOG_TAG = "BatteryManager";
             callbackContext.sendPluginResult(pluginResult);
             
             PluginResult result = new PluginResult(PluginResult.Status.OK, "test");
-            result.setKeepCallback(keepCallback);
+            result.setKeepCallback(false);
             this.batteryCallbackContext.sendPluginResult(result);
           //  updateBatteryInfo("test");
             return true;
