@@ -83,7 +83,7 @@ private static final String LOG_TAG = "BatteryManager";
                 		}
 						PluginResult result = new PluginResult(PluginResult.Status.OK, "test");
 						result.setKeepCallback(false);
-						this.batteryCallbackContext.sendPluginResult(result);
+						batteryCallbackContext.sendPluginResult(result);
                 		//sendUpdate(data, false);
                 //	}
                 }
