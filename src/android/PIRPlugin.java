@@ -73,14 +73,14 @@ private static final String LOG_TAG = "BatteryManager";
         final String data = message;
         cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                	while(true){
+                //	while(true){
                 		try{
-                			Thread.sleep(1000);
+                			Thread.sleep(2000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
-                		sendUpdate(data, true);
-                	}
+                		sendUpdate(data, false);
+                //	}
                 }
             });
     }
