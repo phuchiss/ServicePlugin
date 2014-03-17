@@ -52,7 +52,7 @@ private static final String LOG_TAG = "BatteryManager";
             this.batteryCallbackContext = callbackContext;
 
             // Don't return any result now, since status results will be sent when events come in from broadcast receiver
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
             
@@ -61,7 +61,7 @@ private static final String LOG_TAG = "BatteryManager";
                 	int count =0;
                 	while(true){
                 		try{
-                			Thread.sleep(2000);
+                			Thread.sleep(5000);
                 		}catch(Exception ex){
                 			ex.printStackTrace();
                 		}
