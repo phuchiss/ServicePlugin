@@ -103,7 +103,7 @@ public class MyService extends Service {
 		      if (!c.moveToFirst()) {
 		      }else{
 		    	  do{
-		            result =c.getString(c.getColumnIndex("status");
+		            result =c.getString(c.getColumnIndex("status"));
 		          } while (c.moveToNext());
 		      }
 		      return result;
