@@ -99,12 +99,11 @@ public class MyService extends Service {
 		      String URL = "content://com.example.pircontentprovider.PIRProvider/Motion";
 		      Uri motion = Uri.parse(URL);
 		      Cursor c = getContentResolver().query(motion, null, null, null, "");
-		      String result = "Status :";
+		      String result = "";
 		      if (!c.moveToFirst()) {
 		      }else{
 		    	  do{
-		            result = result + "\n" + c.getString(c.getColumnIndex("id")) + 
-		    	            " with id " +  c.getString(c.getColumnIndex("status"));
+		            result =c.getString(c.getColumnIndex("status");
 		          } while (c.moveToNext());
 		      }
 		      return result;
