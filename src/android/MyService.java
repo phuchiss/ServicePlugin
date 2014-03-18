@@ -83,7 +83,7 @@ public class MyService extends Service {
 			while(RunTask){
 				
 				try{
-					Thread.sleep(3000);
+					Thread.sleep(300);
 				}catch(Exception ex){
 				
 				}
