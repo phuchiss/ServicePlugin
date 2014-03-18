@@ -38,9 +38,9 @@ public class PIRPlugin extends CordovaPlugin{
             		return true;
         	}
         	else if (action.equals("readStatus")) {
-        		//callbackContext.success("MotionStatus : "+MotionStatus);
+        		callbackContext.success("MotionStatus : "+MotionStatus);
         		
-        		if (this.connectionCallbackMotion != null) {
+        	/*	if (this.connectionCallbackMotion != null) {
                 		callbackContext.error( "motion service already running.");
                 		return true;
             		}
@@ -49,12 +49,14 @@ public class PIRPlugin extends CordovaPlugin{
         		PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
     			pluginResult.setKeepCallback(true); 
     			callbackContext.sendPluginResult(pluginResult);
-            		ioioGetdata(connectionCallbackMotion);
+            		ioioGetdata(connectionCallbackMotion);*/
             		return true; 
         		
         	}
         return false;
 	}
+	
+	/*
 	
 	private void ioioGetdata(CallbackContext callback) {
     	final String message = String.valueOf(MotionStatus);
@@ -82,7 +84,7 @@ public class PIRPlugin extends CordovaPlugin{
         } else {
             
         }
-    }
+    }*/
 	
 	// Receive message from the IOIO device
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
