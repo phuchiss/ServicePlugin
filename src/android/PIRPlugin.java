@@ -34,7 +34,7 @@ public class PIRPlugin extends CordovaPlugin{
                 		mMessageReceiver, 
                 		new IntentFilter("returnIOIOdata")
         		); 
-			callbackContext.success("showStatu");
+			callbackContext.success("init success");
             		return true;
         	}
         	else if (action.equals("readStatus")) {
