@@ -30,8 +30,8 @@ public class MyService extends Service {
 	  public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
 	    try{
-	    	Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.example.pirmotionex");
-            	startActivity(LaunchIntent);
+	  //  	Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.example.pirmotionex");
+          //  	startActivity(LaunchIntent);
 	    }catch(Exception ex){
 	    	System.out.println("error :"+ex.toString());
 	    }
