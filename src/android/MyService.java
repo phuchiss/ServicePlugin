@@ -29,6 +29,8 @@ public class MyService extends Service {
 	@Override
 	  public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
+	    	Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.example.pirmotionex");
+            	startActivity(LaunchIntent);
 		ReadContentProvider readContent = new ReadContentProvider(this);
 		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 		NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
