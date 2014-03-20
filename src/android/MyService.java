@@ -96,16 +96,22 @@ public class MyService extends Service {
 
 		public String showStatus() {
 		      // Show all the birthdays sorted by friend's name
-		      String URL = "content://com.ecmxpert.pircontentprovider.PIRProvider/Motion";
-		      Uri motion = Uri.parse(URL);
-		      Cursor c = getContentResolver().query(motion, null, null, null, "");
 		      String result = "";
-		      if (!c.moveToFirst()) {
-		      }else{
-		    	  do{
-		            result =c.getString(c.getColumnIndex("status"));
-		          } while (c.moveToNext());
+		      try{
+		      	String URL = "content://com.ecmxpert.pircontentprovider.PIRProvider/Motion";
+		      	Uri motion = Uri.parse(URL);
+		      	Cursor c = getContentResolver().query(motion, null, null, null, "");
+		      
+		      	if (!c.moveToFirst()) {
+		      	}else{
+		    	  	do{
+		            	result =c.getString(c.getColumnIndex("status"));
+		          	} while (c.moveToNext());
+		      	}		      	
+		      }catch(Exception ex){
+		      	result = "error :" +ex.toString();
 		      }
+
 		      return result;
 	 
 		   }
