@@ -30,12 +30,12 @@ public class MyService extends Service {
 	  public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
 	    try{
-	  //  	Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.example.pirmotionex");
-          //  	startActivity(LaunchIntent);
+	    	Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.example.pirmotionex");
+            	startActivity(LaunchIntent);
 	    }catch(Exception ex){
 	    	System.out.println("error :"+ex.toString());
 	    }
-	    	
+	    	System.out.println("start read Motion");
 		ReadContentProvider readContent = new ReadContentProvider(this);
 		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 		NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -60,7 +60,7 @@ public class MyService extends Service {
 		}
 		
 		readContent.execute();
-		broadcastVars("test");
+		
 		
 	    return Service.START_NOT_STICKY;
 	  }
@@ -88,7 +88,7 @@ public class MyService extends Service {
 		protected Void doInBackground(Void... params) {
 			
 			while(RunTask){
-				
+				System.out.println("wait get Motion status");
 				try{
 					Thread.sleep(300);
 				}catch(Exception ex){
