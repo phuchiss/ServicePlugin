@@ -38,7 +38,7 @@ public class PIRPlugin extends CordovaPlugin{
             		return true;
         	}
         	else if (action.equals("readStatus")) {
-        		callbackContext.success("MotionStatus : "+MotionStatus);
+        		callbackContext.success(MotionStatus);
         		
             		return true; 
         		
